@@ -10,13 +10,13 @@ import { useGlobalContext } from "../context/context";
 export const CartItem = ({ title, price, id, img, quantity }) => {
   const { state, dispatch } = useGlobalContext();
 
-  //   const getTotal = () => {
-  //     dispatch({ type: TOTAL, payload: price });
-  //   };
+  const getTotal = () => {
+    dispatch({ type: TOTAL, payload: price });
+  };
 
-  //   useEffect(() => {
-  //     getTotal();
-  //   }, [price]);
+  useEffect(() => {
+    getTotal();
+  }, [price, quantity]);
 
   const handleRemoveItem = (id) => {
     dispatch({ type: REMOVE_ITEM, payload: id });

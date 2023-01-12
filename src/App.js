@@ -15,12 +15,18 @@ function App() {
           <header>
             <h2>Your bag</h2>
           </header>
-          <div>
-            {state.cart.map((cartItem) => {
-              return <CartItem key={cartItem.id} {...cartItem} />;
-            })}
-          </div>
-          <Footer {...state} />
+          {!state.cart.length ? (
+            <p>is currently empty</p>
+          ) : (
+            <>
+              <div>
+                {state.cart.map((cartItem) => {
+                  return <CartItem key={cartItem.id} {...cartItem} />;
+                })}
+              </div>
+              <Footer {...state} />
+            </>
+          )}
         </section>
       </main>
     </div>

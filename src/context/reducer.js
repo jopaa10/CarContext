@@ -14,11 +14,13 @@ const Reducer = (state, action) => {
         cart: state.cart.filter((item) => item.id !== action.payload),
         totalQuantity: state.cart.length - 1,
       };
+
     case CLEAR_CART:
       return {
         cart: [],
         totalQuantity: 0,
       };
+
     case INCREASE_QUANTITY:
       let singleCartItem = state.cart.find(
         (item) => item.id === action.payload.id
@@ -27,7 +29,9 @@ const Reducer = (state, action) => {
       return {
         ...state,
         quantity: (singleCartItem.quantity = action.payload.quantity + 1),
+        totalQuantity: state.totalQuantity + 1,
       };
+
     case DEACREASE_QUANTITY:
       let singleItem = state.cart.find((item) => item.id === action.payload.id);
 
@@ -36,13 +40,22 @@ const Reducer = (state, action) => {
           ...state,
           quantity: 0,
           cart: state.cart.filter((item) => item.id !== action.payload.id),
-          totalQuantity: state.cart.length - 1,
+          totalQuantity: state.totalQuantity - 1,
         };
       }
 
       return {
         ...state,
         quantity: (singleItem.quantity = action.payload.quantity - 1),
+        totalQuantity: state.totalQuantity - 1,
+      };
+
+    case TOTAL:
+      return {
+        ...state,
+        total: state.cart
+          .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+          .toFixed(2),
       };
 
     default:
