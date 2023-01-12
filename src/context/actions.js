@@ -1,0 +1,5 @@
+export const INCREASE_QUANTITY = "INCREASE_QUANTITY";
+export const DEACREASE_QUANTITY = "DEACREASE_QUANTITY";
+export const CLEAR_CART = "CLEAR_CART";
+export const REMOVE_ITEM = "REMOVE_ITEM";
+export const TOTAL = "TOTAL";

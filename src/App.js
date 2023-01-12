@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { CartItem } from "./component/cartItem";
+import { Footer } from "./component/Footer";
+import { Navbar } from "./component/Navbar";
+import { useGlobalContext } from "./context/context";
 
 function App() {
+  const { state } = useGlobalContext();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <Navbar {...state} />
+        <section className="cart">
+          <header>
+            <h2>Your bag</h2>
+          </header>
+          <div>
+            {state.cart.map((cartItem) => {
+              return <CartItem key={cartItem.id} {...cartItem} />;
+            })}
+          </div>
+          <Footer {...state} />
+        </section>
+      </main>
     </div>
   );
 }
